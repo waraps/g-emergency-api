@@ -6,37 +6,47 @@ const app = require(".");
 
 // routes
 const Routes = require("./routes");
-const { UserRoutes } = require("./routes/index.routes");
+const { RolRoutes, UserRoutes } = require("./routes/index.routes");
 
 // controllers
-const { UserController } = require("./controllers");
+const { RolController, UserController } = require("./controllers");
 
 // services
-const { UserService } = require("./services");
+const { RolService, UserService } = require("./services");
 
 // repositories
-const { UserRepository } = require("./repositories");
+const { RolRepository, UserRepository } = require("./repositories");
 
-// models
+// db
+const db = require("./dal/models");
 
 const container = createContainer();
 
 container
   .register({
     app: asClass(app).singleton(),
-    config: asValue(config),
     router: asFunction(Routes).singleton(),
   })
   .register({
+    config: asValue(config),
+  })
+  .register({
+    db: asValue(db),
+  })
+  .register({
+    RolRoutes: asFunction(RolRoutes).singleton(),
     UserRoutes: asFunction(UserRoutes).singleton(),
   })
   .register({
+    RolController: asClass(RolController).singleton(),
     UserController: asClass(UserController).singleton(),
   })
   .register({
+    RolService: asClass(RolService).singleton(),
     UserService: asClass(UserService).singleton(),
   })
   .register({
+    RolRepository: asClass(RolRepository).singleton(),
     UserRepository: asClass(UserRepository).singleton(),
   });
 
