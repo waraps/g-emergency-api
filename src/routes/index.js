@@ -7,7 +7,7 @@ require("express-async-errors");
 
 const pkg = require("../../package.json");
 
-module.exports = function ({ UserRoutes }) {
+module.exports = function ({ RolRoutes, UserRoutes }) {
   const router = express.Router();
   const apiRoutes = express.Router();
 
@@ -19,6 +19,11 @@ module.exports = function ({ UserRoutes }) {
     .use(compression())
     .use(morgan("dev"));
 
+  apiRoutes.use("/users", UserRoutes);
+  apiRoutes.use("/roles", RolRoutes);
+
+  router.use("/v1/api", apiRoutes);
+
   router.use("/", (req, res) => {
     res.json({
       name: pkg.name,
@@ -27,10 +32,6 @@ module.exports = function ({ UserRoutes }) {
       author: pkg.author,
     });
   });
-
-  apiRoutes.use("/users", UserRoutes);
-
-  router.use("/v1/api", apiRoutes);
 
   return router;
 };
