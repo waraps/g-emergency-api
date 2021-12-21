@@ -1,14 +1,29 @@
 class BaseRepository {
-  constructor(model) {
-    this.model = model;
+  constructor(db, entity) {
+    this._db = db;
+    this.entity = entity;
   }
 
-  async get(id) {
-    return await { message: `user number: ${id}` };
+  getAll() {
+    return this._db[this.entity].findAll();
   }
 
-  async getAll() {
-    return await { message: "list of user" };
+  get(id) {
+    return this._db[this.entity].findOne({ where: { id } });
+  }
+
+  create(entity) {
+    return this._db[this.entity].create(entity);
+  }
+
+  update(id, entity) {
+    delete entity.createdAt;
+    delete entity.updatedAt;
+    return this._db[this.entity].update(entity, { where: { id } });
+  }
+
+  delete(id) {
+    return this._db[this.entity].destroy({ where: { id } });
   }
 }
 
