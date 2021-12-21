@@ -5,6 +5,8 @@ compression = require("compression");
 const morgan = require("morgan");
 require("express-async-errors");
 
+const { NotFoundMiddleware, ErrorMiddleware } = require("../middlewares");
+
 const pkg = require("../../package.json");
 
 module.exports = function ({ RolRoutes, UserRoutes }) {
@@ -32,6 +34,9 @@ module.exports = function ({ RolRoutes, UserRoutes }) {
       author: pkg.author,
     });
   });
+
+  router.use(NotFoundMiddleware);
+  router.use(ErrorMiddleware);
 
   return router;
 };
