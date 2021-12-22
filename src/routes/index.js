@@ -9,7 +9,14 @@ const { NotFoundMiddleware, ErrorMiddleware } = require("../middlewares");
 
 const pkg = require("../../package.json");
 
-module.exports = function ({ RolRoutes, UserRoutes }) {
+module.exports = function ({
+  RolRoutes,
+  UserRoutes,
+  QuestionRoutes,
+  AnswerRoutes,
+  ConsultationRoutes,
+  PaymentRoutes,
+}) {
   const router = express.Router();
   const apiRoutes = express.Router();
 
@@ -23,6 +30,10 @@ module.exports = function ({ RolRoutes, UserRoutes }) {
 
   apiRoutes.use("/users", UserRoutes);
   apiRoutes.use("/roles", RolRoutes);
+  apiRoutes.use("/questions", QuestionRoutes);
+  apiRoutes.use("/answers", AnswerRoutes);
+  apiRoutes.use("/consultations", ConsultationRoutes),
+    apiRoutes.use("/payments", PaymentRoutes);
 
   router.use("/v1/api", apiRoutes);
 
