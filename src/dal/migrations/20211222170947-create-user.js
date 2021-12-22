@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         validate: {
           notNull: {
-            msg: "Please enter a valid name",
+            msg: "Please enter your First Name",
           },
         },
       },
@@ -22,28 +22,46 @@ module.exports = {
         type: Sequelize.STRING,
         validate: {
           notNull: {
-            msg: "Please enter a valid lastname",
+            msg: "Please enter a valid Last Name",
           },
         },
       },
-      cedula: {
+      dni: {
         allowNull: false,
-        trim: true,
         type: Sequelize.STRING,
         validate: {
           notNull: {
-            msg: "Please enter a valid cedula",
+            msg: "Please enter a valid dni",
+          },
+        },
+      },
+      phone: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate: {
+          notNull: {
+            msg: "Please enter a valid phone number",
+          },
+          is: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+        },
+      },
+      address: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        validate: {
+          notNull: {
+            msg: "Please enter a valid address",
           },
         },
       },
       email: {
         allowNull: false,
-        trim: true,
         type: Sequelize.STRING,
-        unique: true,
         validate: {
-          isEmail: true,
           notNull: {
+            msg: "Please enter a valid email",
+          },
+          isEmail: {
             msg: "Please enter a valid email",
           },
         },
@@ -57,31 +75,18 @@ module.exports = {
           },
         },
       },
-      phone: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          is: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-          notNull: {
-            msg: "Please enter a valid number phone",
-          },
-        },
-      },
-      address: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          notNull: {
-            msg: "Please enter a valid address",
-          },
-        },
-      },
       roleId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "Roles",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         validate: {
           notNull: {
-            msg: "Please enter a valid roleId",
+            msg: "Please a valid role id",
           },
         },
       },

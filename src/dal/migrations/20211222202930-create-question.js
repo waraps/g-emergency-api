@@ -11,6 +11,11 @@ module.exports = {
       question: {
         allowNull: false,
         type: Sequelize.STRING,
+        validate: {
+          notNull: {
+            msg: "Please enter a valid question",
+          },
+        },
       },
       createdAt: {
         allowNull: false,

@@ -1,20 +1,20 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Rols", {
+    await queryInterface.createTable("Roles", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      rol: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true,
         validate: {
           notNull: {
-            msg: "Please enter a valid rol name",
+            msg: "Please enter a valid role name",
           },
         },
       },
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Rols");
+    await queryInterface.dropTable("Roles");
   },
 };
