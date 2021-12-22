@@ -8,14 +8,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Payment.belongsTo(models.Consultation);
+      Payment.belongsTo(models.Consultation, {
+        foreignKey: "id",
+        target_key: "consultationId",
+      });
     }
   }
   Payment.init(
     {
       receipt: DataTypes.STRING,
       amount: DataTypes.FLOAT,
-      reference: DataTypes.STRING,
+      receiptId: DataTypes.STRING,
       bank: DataTypes.STRING,
       consultationId: DataTypes.INTEGER,
     },

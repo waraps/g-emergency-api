@@ -10,8 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Question.hasMany(models.Answer, {
         foreignKey: "questionId",
-        as: "answers",
-        onDelete: "CASCADE",
       });
     }
   }

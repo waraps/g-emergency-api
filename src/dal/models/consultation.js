@@ -8,11 +8,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Consultation.belongsTo(models.User);
+      Consultation.belongsTo(models.User, {
+        foreignKey: "id",
+        target_key: "patientId",
+      });
+
+      Consultation.belongsTo(models.User, {
+        foreignKey: "id",
+        target_key: "doctorId",
+      });
+
       Consultation.hasOne(models.Payment, {
         foreignKey: "consultationId",
-        as: "payment",
-        onDelete: "CASCADE",
       });
     }
   }
