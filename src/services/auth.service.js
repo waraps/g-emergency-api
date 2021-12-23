@@ -9,6 +9,7 @@ class AuthService {
     user.email = user.email.replace(/\s+/g, "");
     user.phone = user.phone.replace(/\s+/g, "");
     user.dni = user.dni.replace(/\s+/g, "");
+    user.isVerified = user.isVerified ? user.isVerified : false;
     const { email, phone } = user;
 
     if (!CommonsHelper.isValidEmail(email)) {

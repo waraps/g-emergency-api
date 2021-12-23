@@ -78,6 +78,16 @@ module.exports = {
           },
         },
       },
+      isVerified: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        validate: {
+          notNull: {
+            msg: "Please enter a valid password",
+          },
+        },
+      },
       roleId: {
         allowNull: false,
         type: Sequelize.INTEGER,
