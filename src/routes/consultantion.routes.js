@@ -1,17 +1,32 @@
 const { Router } = require("express");
+const { AuthMiddleware } = require("../middlewares");
 
 module.exports = function ({ ConsultationController }) {
   const router = Router();
 
-  router.get("/:id", ConsultationController.get.bind(ConsultationController));
-  router.get("", ConsultationController.getAll.bind(ConsultationController));
-  router.post("", ConsultationController.create.bind(ConsultationController));
+  router.get(
+    "/:id",
+    AuthMiddleware,
+    ConsultationController.get.bind(ConsultationController)
+  );
+  router.get(
+    "",
+    AuthMiddleware,
+    ConsultationController.getAll.bind(ConsultationController)
+  );
+  router.post(
+    "",
+    AuthMiddleware,
+    ConsultationController.create.bind(ConsultationController)
+  );
   router.put(
     "/:id",
+    AuthMiddleware,
     ConsultationController.update.bind(ConsultationController)
   );
   router.delete(
     "/:id",
+    AuthMiddleware,
     ConsultationController.delete.bind(ConsultationController)
   );
 
