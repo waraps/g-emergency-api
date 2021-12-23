@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { compareSync, hashSync, genSaltSync } = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -21,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "doctorId",
       });
     }
+
+    validPassword = (password) => {
+      return compareSync(password, this.password);
+    };
   }
   User.init(
     {
@@ -34,6 +39,12 @@ module.exports = (sequelize, DataTypes) => {
       roleId: DataTypes.INTEGER,
     },
     {
+      hooks: {
+        beforeCreate: (User) => {
+          const salt = genSaltSync(10);
+          User.password = hashSync(User.password, salt);
+        },
+      },
       sequelize,
       modelName: "User",
     }
