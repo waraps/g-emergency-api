@@ -29,6 +29,7 @@ module.exports = {
       dni: {
         allowNull: false,
         type: Sequelize.STRING,
+        trim: true,
         validate: {
           notNull: {
             msg: "Please enter a valid dni",
@@ -38,6 +39,7 @@ module.exports = {
       phone: {
         allowNull: false,
         type: Sequelize.STRING,
+        trim: true,
         validate: {
           notNull: {
             msg: "Please enter a valid phone number",
@@ -57,6 +59,7 @@ module.exports = {
       email: {
         allowNull: false,
         type: Sequelize.STRING,
+        trim: true,
         validate: {
           notNull: {
             msg: "Please enter a valid email",
