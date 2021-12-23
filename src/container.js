@@ -7,6 +7,7 @@ const app = require(".");
 // routes
 const Routes = require("./routes");
 const {
+  AuthRoutes,
   RolRoutes,
   UserRoutes,
   QuestionRoutes,
@@ -17,6 +18,7 @@ const {
 
 // controllers
 const {
+  AuthController,
   RolController,
   UserController,
   QuestionController,
@@ -27,6 +29,7 @@ const {
 
 // services
 const {
+  AuthService,
   RolService,
   UserService,
   QuestionService,
@@ -62,6 +65,7 @@ container
     db: asValue(db),
   })
   .register({
+    AuthRoutes: asFunction(AuthRoutes).singleton(),
     RolRoutes: asFunction(RolRoutes).singleton(),
     UserRoutes: asFunction(UserRoutes).singleton(),
     QuestionRoutes: asFunction(QuestionRoutes).singleton(),
@@ -70,6 +74,7 @@ container
     PaymentRoutes: asFunction(PaymentRoutes).singleton(),
   })
   .register({
+    AuthController: asClass(AuthController).singleton(),
     RolController: asClass(RolController).singleton(),
     UserController: asClass(UserController).singleton(),
     QuestionController: asClass(QuestionController).singleton(),
@@ -78,6 +83,7 @@ container
     PaymentController: asClass(PaymentController).singleton(),
   })
   .register({
+    AuthService: asClass(AuthService).singleton(),
     RolService: asClass(RolService).singleton(),
     UserService: asClass(UserService).singleton(),
     QuestionService: asClass(QuestionService).singleton(),
