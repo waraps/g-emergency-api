@@ -1,4 +1,5 @@
 module.exports = {
+  AuthService: require("./auth.service"),
   RolService: require("./rol.services"),
   UserService: require("./user.service"),
   QuestionService: require("./question.service"),

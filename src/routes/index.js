@@ -5,11 +5,13 @@ compression = require("compression");
 const morgan = require("morgan");
 require("express-async-errors");
 
+// middlewares
 const { NotFoundMiddleware, ErrorMiddleware } = require("../middlewares");
 
 const pkg = require("../../package.json");
 
 module.exports = function ({
+  AuthRoutes,
   RolRoutes,
   UserRoutes,
   QuestionRoutes,
@@ -28,12 +30,13 @@ module.exports = function ({
     .use(compression())
     .use(morgan("dev"));
 
+  apiRoutes.use("/auth", AuthRoutes);
   apiRoutes.use("/users", UserRoutes);
   apiRoutes.use("/roles", RolRoutes);
   apiRoutes.use("/questions", QuestionRoutes);
   apiRoutes.use("/answers", AnswerRoutes);
-  apiRoutes.use("/consultations", ConsultationRoutes),
-    apiRoutes.use("/payments", PaymentRoutes);
+  apiRoutes.use("/consultations", ConsultationRoutes);
+  apiRoutes.use("/payments", PaymentRoutes);
 
   router.use("/v1/api", apiRoutes);
 
