@@ -1,5 +1,8 @@
 const { Router } = require("express");
-const { AuthMiddleware } = require("../middlewares");
+const {
+  AuthMiddleware,
+  IsAdministratorOrDoctorMiddleware,
+} = require("../middlewares");
 
 module.exports = function ({ AnswerController }) {
   const router = Router();
@@ -11,7 +14,7 @@ module.exports = function ({ AnswerController }) {
   );
   router.post(
     "",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
     AnswerController.create.bind(AnswerController)
   );
   router.get(
@@ -21,12 +24,12 @@ module.exports = function ({ AnswerController }) {
   );
   router.put(
     "/:id",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
     AnswerController.update.bind(AnswerController)
   );
   router.delete(
     "/:id",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
     AnswerController.delete.bind(AnswerController)
   );
 

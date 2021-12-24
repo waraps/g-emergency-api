@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { AuthMiddleware } = require("../middlewares");
+const { AuthMiddleware, IsAdministratorMiddleware } = require("../middlewares");
 
 module.exports = function ({ PaymentController }) {
   const router = Router();
@@ -21,12 +21,12 @@ module.exports = function ({ PaymentController }) {
   );
   router.put(
     "/:id",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorMiddleware],
     PaymentController.update.bind(PaymentController)
   );
   router.delete(
     "/:id",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorMiddleware],
     PaymentController.delete.bind(PaymentController)
   );
 

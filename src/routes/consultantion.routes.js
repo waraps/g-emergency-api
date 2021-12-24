@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { AuthMiddleware } = require("../middlewares");
+const { AuthMiddleware, IsAdministratorMiddleware } = require("../middlewares");
 
 module.exports = function ({ ConsultationController }) {
   const router = Router();
@@ -26,7 +26,7 @@ module.exports = function ({ ConsultationController }) {
   );
   router.delete(
     "/:id",
-    AuthMiddleware,
+    [AuthMiddleware, IsAdministratorMiddleware],
     ConsultationController.delete.bind(ConsultationController)
   );
 
