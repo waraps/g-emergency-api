@@ -17,15 +17,13 @@ module.exports = {
           },
         },
       },
-      score: {
+      isCorrect: {
         allowNull: false,
-        type: Sequelize.FLOAT,
+        type: Sequelize.BOOLEAN,
         validate: {
           notNull: {
-            msg: "Please a valid score",
+            msg: "Please a valid answer",
           },
-          min: 1,
-          max: 100,
         },
       },
       questionId: {
