@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Question.init(
     {
       question: DataTypes.STRING,
+      score: DataTypes.FLOAT,
     },
     {
       sequelize,

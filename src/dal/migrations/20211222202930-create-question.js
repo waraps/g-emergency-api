@@ -17,6 +17,17 @@ module.exports = {
           },
         },
       },
+      score: {
+        allowNull: false,
+        type: Sequelize.FLOAT,
+        validate: {
+          notNull: {
+            msg: "Please a valid score",
+          },
+          min: 1,
+          max: 100,
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
