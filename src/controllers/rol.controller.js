@@ -3,15 +3,26 @@ class RolController {
     this._rolService = RolService;
   }
 
+  async getAll(req, res) {
+    const roles = await this._rolService.getAll();
+    return res.send(roles);
+  }
+
+  async getAllWithUsers(req, res) {
+    const roles = await this._rolService.getAllWithUsers();
+    return res.send(roles);
+  }
+
   async get(req, res) {
     const { id } = req.params;
     const rol = await this._rolService.get(id);
     return res.send(rol);
   }
 
-  async getAll(req, res) {
-    const roles = await this._rolService.getAll();
-    return res.send(roles);
+  async getWithUser(req, res) {
+    const { id } = req.params;
+    const rol = await this._rolService.getWithUser(id);
+    return res.send(rol);
   }
 
   async create(req, res) {

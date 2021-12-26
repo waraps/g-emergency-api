@@ -4,8 +4,18 @@ const { AuthMiddleware, IsAdministratorMiddleware } = require("../middlewares");
 module.exports = function ({ RolController }) {
   const router = Router();
 
-  router.get("/:id", AuthMiddleware, RolController.get.bind(RolController));
   router.get("", AuthMiddleware, RolController.getAll.bind(RolController));
+  router.get(
+    "/with_users",
+    AuthMiddleware,
+    RolController.getAllWithUsers.bind(RolController)
+  );
+  router.get("/:id", AuthMiddleware, RolController.get.bind(RolController));
+  router.get(
+    "/with_users/:id",
+    AuthMiddleware,
+    RolController.getWithUser.bind(RolController)
+  );
   router.post(
     "",
     [AuthMiddleware, IsAdministratorMiddleware],
