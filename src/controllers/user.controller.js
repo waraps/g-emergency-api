@@ -14,9 +14,33 @@ class UserController {
     return res.send(users);
   }
 
-  async create(req, res) {
+  async getUser(req, res) {
+    console.log("object");
+    const { id } = req.params;
+    const user = await this._userService.getUser(id);
+    return res.send(user);
+  }
+
+  async getUsers(req, res) {
+    const users = await this._userService.getUsers();
+    return res.send(users);
+  }
+
+  async getAllWithRole(req, res) {
+    const users = await this._userService.getAllWithRole();
+    return res.send(users);
+  }
+
+  async getWithRole(req, res) {
+    const { id } = req.params;
+    const user = await this._userService.getWithRole(id);
+    return res.send(user);
+  }
+
+  async createUser(req, res) {
     const { body } = req;
-    const user = await this._userService.create(body);
+    console.log("object");
+    const user = await this._userService.createUser(body);
     return res.status(201).send(user);
   }
 

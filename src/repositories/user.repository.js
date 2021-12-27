@@ -6,8 +6,24 @@ class UserRepository extends BaseRepository {
     this._db = db;
   }
 
+  getUsers() {
+    return this._db["User"].findAll();
+  }
+
+  getUser(id) {
+    return this._db["User"].findOne({ where: { id } });
+  }
+
   getUserByEmail(email) {
     return this._db["User"].findOne({ where: { email } });
+  }
+
+  getAllWithRole() {
+    return this._db["User"].findAll({ include: ["Role"] });
+  }
+
+  getWithRole(id) {
+    return this._db["User"].findOne({ where: { id }, include: ["Role"] });
   }
 }
 
