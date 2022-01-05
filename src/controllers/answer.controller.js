@@ -9,8 +9,19 @@ class AnswerController {
     return res.send(answer);
   }
 
+  async getWithQuestion(req, res) {
+    const { id } = req.params;
+    const answer = await this._answerService.getWithQuestion(id);
+    return res.send(answer);
+  }
+
   async getAll(req, res) {
     const answers = await this._answerService.getAll();
+    return res.send(answers);
+  }
+
+  async getAllWithQuestion(req, res) {
+    const answers = await this._answerService.getAllWithQuestion();
     return res.send(answers);
   }
 

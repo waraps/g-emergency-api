@@ -12,6 +12,11 @@ module.exports = function ({ AnswerController }) {
     AuthMiddleware,
     AnswerController.getAll.bind(AnswerController)
   );
+  router.get(
+    "/with_question",
+    AuthMiddleware,
+    AnswerController.getAllWithQuestion.bind(AnswerController)
+  );
   router.post(
     "",
     [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
@@ -21,6 +26,11 @@ module.exports = function ({ AnswerController }) {
     "/:id",
     AuthMiddleware,
     AnswerController.get.bind(AnswerController)
+  );
+  router.get(
+    "/with_question/:id",
+    AuthMiddleware,
+    AnswerController.getWithQuestion.bind(AnswerController)
   );
   router.put(
     "/:id",
