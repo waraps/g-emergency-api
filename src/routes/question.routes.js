@@ -8,19 +8,29 @@ module.exports = function ({ QuestionController }) {
   const router = Router();
 
   router.get(
+    "",
+    AuthMiddleware,
+    QuestionController.getAll.bind(QuestionController)
+  );
+  router.get(
+    "/with_answers",
+    AuthMiddleware,
+    QuestionController.getAllWithAnswers.bind(QuestionController)
+  );
+  router.post(
+    "",
+    [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
+    QuestionController.createWithAnswers.bind(QuestionController)
+  );
+  router.get(
     "/:id",
     AuthMiddleware,
     QuestionController.get.bind(QuestionController)
   );
   router.get(
-    "",
+    "/with_answers/:id",
     AuthMiddleware,
-    QuestionController.getAll.bind(QuestionController)
-  );
-  router.post(
-    "",
-    [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
-    QuestionController.create.bind(QuestionController)
+    QuestionController.getWithAnswers.bind(QuestionController)
   );
   router.put(
     "/:id",
