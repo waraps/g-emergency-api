@@ -16,6 +16,7 @@ module.exports = function ({
   UserRoutes,
   QuestionRoutes,
   AnswerRoutes,
+  QuizRoutes,
   ConsultationRoutes,
   PaymentRoutes,
 }) {
@@ -35,6 +36,7 @@ module.exports = function ({
   apiRoutes.use("/roles", RolRoutes);
   apiRoutes.use("/questions", QuestionRoutes);
   apiRoutes.use("/answers", AnswerRoutes);
+  apiRoutes.use("/quiz", QuizRoutes);
   apiRoutes.use("/consultations", ConsultationRoutes);
   apiRoutes.use("/payments", PaymentRoutes);
 
