@@ -19,7 +19,7 @@ module.exports = {
         onUpdate: "CASCADE",
         validate: {
           notNull: {
-            msg: "Please enter a valid test id",
+            msg: "Please enter a valid quiz id",
           },
         },
       },
