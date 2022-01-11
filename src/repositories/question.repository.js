@@ -8,7 +8,9 @@ class QuestionRepository extends BaseRepository {
   async createWithAnswers(entity) {
     const { answers, question, score } = entity;
 
-    let newQuestion = await this._db["Question"].create({ question, score });
+    const parsedScore = parseFloat(score).toFixed(1)
+
+    let newQuestion = await this._db["Question"].create({ question, parsedScore });
     newQuestion = newQuestion.toJSON();
 
     const savedAnswers = await Promise.all(
