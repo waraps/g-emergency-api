@@ -15,7 +15,6 @@ class UserController {
   }
 
   async getUser(req, res) {
-    console.log("object");
     const { id } = req.params;
     const user = await this._userService.getUser(id);
     return res.send(user);
@@ -39,7 +38,6 @@ class UserController {
 
   async createUser(req, res) {
     const { body } = req;
-    console.log("object");
     const user = await this._userService.createUser(body);
     return res.status(201).send(user);
   }
