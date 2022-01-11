@@ -12,6 +12,7 @@ const {
   UserRoutes,
   QuestionRoutes,
   AnswerRoutes,
+  QuizRoutes,
   ConsultationRoutes,
   PaymentRoutes,
 } = require("./routes/index.routes");
@@ -23,6 +24,7 @@ const {
   UserController,
   QuestionController,
   AnswerController,
+  QuizController,
   ConsultationController,
   PaymentController,
 } = require("./controllers");
@@ -34,6 +36,7 @@ const {
   UserService,
   QuestionService,
   AnswerService,
+  QuizService,
   ConsultationService,
   PaymentService,
 } = require("./services");
@@ -44,6 +47,7 @@ const {
   UserRepository,
   QuestionRepository,
   AnswerRepository,
+  QuizRepository,
   ConsultationRepository,
   PaymentRepository,
 } = require("./repositories");
@@ -70,6 +74,7 @@ container
     UserRoutes: asFunction(UserRoutes).singleton(),
     QuestionRoutes: asFunction(QuestionRoutes).singleton(),
     AnswerRoutes: asFunction(AnswerRoutes).singleton(),
+    QuizRoutes: asFunction(QuizRoutes).singleton(),
     ConsultationRoutes: asFunction(ConsultationRoutes).singleton(),
     PaymentRoutes: asFunction(PaymentRoutes).singleton(),
   })
@@ -79,6 +84,7 @@ container
     UserController: asClass(UserController).singleton(),
     QuestionController: asClass(QuestionController).singleton(),
     AnswerController: asClass(AnswerController).singleton(),
+    QuizController: asClass(QuizController).singleton(),
     ConsultationController: asClass(ConsultationController).singleton(),
     PaymentController: asClass(PaymentController).singleton(),
   })
@@ -88,6 +94,7 @@ container
     UserService: asClass(UserService).singleton(),
     QuestionService: asClass(QuestionService).singleton(),
     AnswerService: asClass(AnswerService).singleton(),
+    QuizService: asClass(QuizService).singleton(),
     ConsultationService: asClass(ConsultationService).singleton(),
     PaymentService: asClass(PaymentService).singleton(),
   })
@@ -96,6 +103,7 @@ container
     UserRepository: asClass(UserRepository).singleton(),
     QuestionRepository: asClass(QuestionRepository).singleton(),
     AnswerRepository: asClass(AnswerRepository).singleton(),
+    QuizRepository: asClass(QuizRepository).singleton(),
     ConsultationRepository: asClass(ConsultationRepository).singleton(),
     PaymentRepository: asClass(PaymentRepository).singleton(),
   });
