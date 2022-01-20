@@ -47,6 +47,49 @@ class QuizController {
     return res.send(formattedQuiz);
   }
 
+  async checkQuiz(req, res) {
+    const { id } = req.params;
+    const { responses } = req.body;
+    const quiz = await this._quizService.getQuiz(id);
+    const { Questions } = quiz;
+    const questionCheck = Questions.map((question) => {
+      return {
+        questionId: question.id,
+        score: question.score,
+        correctAnswer: question.Answers.filter(
+          (answer) => answer.isCorrect
+        ).map((answer) => answer.id)[0],
+      };
+    });
+
+    let clientScore = 0;
+
+    for (let i = 0; i < questionCheck.length; i++) {
+      const { questionId, correctAnswer, score } = questionCheck[i];
+      for (let j = 0; j < responses.length; j++) {
+        const { question, answer } = responses[j];
+        if (questionId === question) {
+          if (correctAnswer === answer) {
+            clientScore += score;
+          }
+        }
+      }
+    }
+
+    clientScore = Number(parseFloat(clientScore).toFixed(2));
+    let quizChecked = {
+      clientScore,
+      reprobate: true,
+    };
+    if (clientScore >= 90) {
+      quizChecked = {
+        ...quizChecked,
+        reprobate: false,
+      };
+    }
+    return res.send(quizChecked);
+  }
+
   async getAll(req, res) {
     const quizzes = await this._quizService.getAll();
     return res.send(quizzes);

@@ -18,6 +18,11 @@ module.exports = function ({ QuizController }) {
     [AuthMiddleware, IsAdministratorOrDoctorMiddleware],
     QuizController.createWithQuestions.bind(QuizController)
   );
+  router.post(
+    "/check/:id",
+    AuthMiddleware,
+    QuizController.checkQuiz.bind(QuizController)
+  );
   router.get("/:id", AuthMiddleware, QuizController.get.bind(QuizController));
   router.get(
     "/raw/:id",
