@@ -1,5 +1,9 @@
 const { Router } = require("express");
-const { AuthMiddleware, IsAdministratorMiddleware } = require("../middlewares");
+const {
+  AuthMiddleware,
+  IsAdministratorMiddleware,
+  UploadImageMiddleware,
+} = require("../middlewares");
 
 module.exports = function ({ PaymentController }) {
   const router = Router();
@@ -16,7 +20,7 @@ module.exports = function ({ PaymentController }) {
   );
   router.post(
     "",
-    AuthMiddleware,
+    [AuthMiddleware, UploadImageMiddleware],
     PaymentController.create.bind(PaymentController)
   );
   router.put(

@@ -4,4 +4,5 @@ module.exports = {
   AuthMiddleware: require("./auth.middleware"),
   IsAdministratorMiddleware: require("./isAdministrator.middleware"),
   IsAdministratorOrDoctorMiddleware: require("./isAdministratorOrDoctor.middleware"),
+  UploadImageMiddleware: require("./upload-image.middleware"),
 };

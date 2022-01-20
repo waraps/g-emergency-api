@@ -3,6 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 compression = require("compression");
 const morgan = require("morgan");
+const path = require("path");
 require("express-async-errors");
 
 // middlewares
@@ -39,6 +40,9 @@ module.exports = function ({
   apiRoutes.use("/quiz", QuizRoutes);
   apiRoutes.use("/consultations", ConsultationRoutes);
   apiRoutes.use("/payments", PaymentRoutes);
+
+  // Folder for images storage
+  apiRoutes.use("/uploads", express.static(path.resolve("uploads")));
 
   router.use("/v1/api", apiRoutes);
 

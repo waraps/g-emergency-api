@@ -1,3 +1,5 @@
+const path = require("path");
+
 class PaymentController {
   constructor({ PaymentService }) {
     this._paymentService = PaymentService;
@@ -6,7 +8,17 @@ class PaymentController {
   async get(req, res) {
     const { id } = req.params;
     const payment = await this._paymentService.get(id);
-    return res.send(payment);
+    const responsePayment = {
+      id: payment.id,
+      receipt: path.join(__dirname, "../../", payment.receipt),
+      amount: payment.amount,
+      receiptId: payment.receiptId,
+      bank: payment.bank,
+      consultationId: payment.consultationId,
+      createdAt: payment.createdAt,
+      updatedAt: payment.updatedAt,
+    };
+    return res.send(responsePayment);
   }
 
   async getAll(req, res) {
@@ -15,8 +27,15 @@ class PaymentController {
   }
 
   async create(req, res) {
-    const { body } = req;
-    const payment = await this._paymentService.create(body);
+    const { amount, receiptId, bank, consultationId } = req.body;
+    const newPayment = {
+      receipt: req.file.path,
+      amount,
+      receiptId,
+      bank,
+      consultationId,
+    };
+    const payment = await this._paymentService.create(newPayment);
     return res.status(201).send(payment);
   }
 
