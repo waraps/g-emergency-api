@@ -48,7 +48,7 @@ class PaymentController {
       bank,
       consultationId,
     };
-    const payment = await this._paymentService.create(newPayment);
+    const payment = await this._paymentService.createPayment(newPayment);
     return res.status(201).send(payment);
   }
 
