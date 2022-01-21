@@ -77,6 +77,15 @@ class BaseService {
       throw error;
     }
 
+    const currentEntity = await this._repository.get(id);
+
+    if (!currentEntity) {
+      const error = new Error();
+      error.status = 404;
+      error.message = "entity does not found";
+      throw error;
+    }
+
     const deletedEntity = await this._repository.delete(id);
 
     if (!deletedEntity) {
@@ -86,7 +95,7 @@ class BaseService {
       throw error;
     }
 
-    return deletedEntity;
+    return currentEntity;
   }
 }
 
