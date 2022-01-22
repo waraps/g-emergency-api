@@ -17,8 +17,7 @@ class PaymentService extends BaseService {
     }
 
     const createdEntity = await this._paymentRepository.create(entity);
-    const mailResponse = await MailerHelper.sendMail();
-    console.log(mailResponse);
+    await MailerHelper.sendMail(createdEntity);
 
     return createdEntity;
   }
