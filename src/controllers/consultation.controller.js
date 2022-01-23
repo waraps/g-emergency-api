@@ -5,7 +5,7 @@ class ConsultationController {
 
   async get(req, res) {
     const { id } = req.params;
-    const consultation = await this._consultationService.get(id);
+    const consultation = await this._consultationService.getWithPayment(id);
     return res.send(consultation);
   }
 
