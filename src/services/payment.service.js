@@ -1,4 +1,4 @@
-const { MailerHelper } = require("../helpers");
+const { SMSHelper, MailerHelper } = require("../helpers");
 
 const BaseService = require("./base.service");
 
@@ -37,9 +37,10 @@ class PaymentService extends BaseService {
       description: consultation.description,
     };
 
+    await SMSHelper.sendSMS(mailInfo);
     await MailerHelper.sendMail(mailInfo);
 
-    return createdEntity;
+    return mailInfo;
   }
 }
 
