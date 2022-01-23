@@ -92,7 +92,7 @@ const generateTemplateEmail = (info) => {
                       <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Consulta de Emergencia Solicitada</h1>
                       <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Se ha solicitado una consulta de emergencia a través de la plataforma <strong>Galenos Emergencia</strong>, por favor comuníquese lo más rápido posible con el cliente para evaluar al paciente.</p>
                       <h2>Información de Solicitud</h2>
-                      <h3>Paciente</h3>
+                      <h3>Cliente</h3>
                       <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Nombre: </strong>${
                         info.fullname
                       }</p>
