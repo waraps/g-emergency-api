@@ -3,9 +3,11 @@ const { MailerHelper } = require("../helpers");
 const BaseService = require("./base.service");
 
 class PaymentService extends BaseService {
-  constructor({ PaymentRepository }) {
+  constructor({ PaymentRepository, ConsultationRepository, UserRepository }) {
     super(PaymentRepository);
     this._paymentRepository = PaymentRepository;
+    this._consultationRepository = ConsultationRepository;
+    this._userRepository = UserRepository;
   }
 
   async createPayment(entity) {
@@ -17,7 +19,25 @@ class PaymentService extends BaseService {
     }
 
     const createdEntity = await this._paymentRepository.create(entity);
-    await MailerHelper.sendMail(createdEntity);
+    const consultation = await this._consultationRepository.getWithPayment(
+      createdEntity.consultationId
+    );
+    const user = await this._userRepository.getUser(consultation.patientId);
+
+    const mailInfo = {
+      fullname: `${user.firstName} ${user.lastName}`,
+      dni: user.dni,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      bank: createdEntity.bank,
+      receiptId: createdEntity.receiptId,
+      receipt: createdEntity.receipt,
+      consultation: consultation.id,
+      description: consultation.description,
+    };
+
+    await MailerHelper.sendMail(mailInfo);
 
     return createdEntity;
   }

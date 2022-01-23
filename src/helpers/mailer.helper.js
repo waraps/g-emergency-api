@@ -41,7 +41,7 @@ module.exports.sendMail = async function (info) {
       from: "Galenos Emergencia <galenosclinica.vet@gmail.com>",
       to: "manuelmenesesg@gmail.com",
       subject: "Solicitud de Consulta de Emergencia",
-      text: `Consulta de Emergencia Solicitada; Cliente: ; Tlf Cliente: ; Banco: ${info.bank}; Numero de Referencia: ${info.receiptId};`,
+      text: `Consulta de Emergencia Solicitada; Paciente: ${info.fullname}; Cédula: ${info.dni}; Tlf Paciente: ${info.phone}; Banco: ${info.bank}; Número de Referencia: ${info.receiptId};`,
       html: generateTemplateEmail(info),
     };
 
@@ -75,10 +75,10 @@ const generateTemplateEmail = (info) => {
     </style>
   </head>
   <body style="margin:0;padding:0;">
-    <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
+    <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-radius:5px;border-spacing:0;background:#ffffff;">
       <tr>
         <td align="center" style="padding:0;">
-          <table role="presentation" style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
+          <table role="presentation" style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;border-radius:5px;text-align:left;">
             <tr>
               <td align="center" style="padding:40px 0 30px 0;background:#514D67;">
                 <img src="https://i.ibb.co/PxWP3tk/Logo-Galenos-Verde-Copy.png" alt="" width="180" style="height:auto;display:block;border:1px solid #fff;border-radius:50%;" />
@@ -86,25 +86,47 @@ const generateTemplateEmail = (info) => {
             </tr>
             <tr>
               <td style="padding:36px 30px 42px 30px;">
-                <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+                <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-radius:5px;border-spacing:0;">
                   <tr>
-                    <td style="padding:0 0 36px 0;color:#153643;">
+                    <td style="padding:0 0 36px 0;color:#444;">
                       <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Consulta de Emergencia Solicitada</h1>
                       <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Se ha solicitado una consulta de emergencia a través de la plataforma <strong>Galenos Emergencia</strong>, por favor comuníquese lo más rápido posible con el cliente para evaluar al paciente.</p>
-                      <h3>Datos de la solicitud</h3>
-                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Cliente: </strong></p>
-                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Tlf Cliente: </strong></p>
+                      <h2>Información de Solicitud</h2>
+                      <h3>Paciente</h3>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Nombre: </strong>${
+                        info.fullname
+                      }</p>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Cédula: </strong> ${
+                        info.dni
+                      }</p>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Teléfono: </strong> ${
+                        info.phone
+                      }</p>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Correo: </strong> ${
+                        info.email
+                      }</p>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Dirección: </strong> ${
+                        info.address
+                      }</p>
+                      <h3>Consulta</h3>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Consulta #: </strong> ${
+                        info.consultation
+                      }</p>
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Descripción: </strong> ${
+                        info.description
+                      }</p>
+                      <h3>Pago</h3>
                       <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Banco: </strong> ${
                         info.bank
                       }</p>
-                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Numero de Referencia: </strong> ${
+                      <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><strong>Número de Referencia: </strong> ${
                         info.receiptId
                       }</p>
                       <p style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"><a href="${path.join(
                         __dirname,
                         "../../",
                         info.receipt
-                      )}" style="color:#847DC1;text-decoration:underline;">Comprobante de pago</a></p>
+                      )}" style="color:#847DC1;text-decoration:underline;">Comprobante de Pago</a></p>
                     </td>
                   </tr>
                 </table>
